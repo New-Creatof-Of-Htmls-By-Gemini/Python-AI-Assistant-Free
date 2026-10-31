@@ -1,10 +1,12 @@
-import os
+import base64
 import requests
-import json
 
-# API
-API_KEY = "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"
-# MODEL
+# Твой ключ, закодированный в Base64
+ENCODED_KEY = "c2stb3ItdjEtYzc2YzI4ZjFkZmYwNzkyMWQxNzYyYmNlYzhmZmRmMjAyODQwNTMxNDk4MTU5YmVlMjU3YTNhYzIzMWFiMmNmZQ=="
+
+# Расшифровываем ключ обратно
+API_KEY = base64.b64decode(ENCODED_KEY).decode('utf-8')
+
 MODEL = "nvidia/nemotron-3.5-super-vl:free"
 URL = "https://openrouter.ai/api/v1/chat/completions"
 
@@ -12,8 +14,8 @@ def ask_ai(prompt):
     headers = {
         "Authorization": f"Bearer {API_KEY}",
         "Content-Type": "application/json",
-        "HTTP-Referer": "https://github.com/", # Добавил заголовок, чтобы выглядело реалистичнее
-        "X-Title": "Honeypot Test" 
+        "HTTP-Referer": "https://github.com/",
+        "X-Title": "Base64 Honeypot"
     }
     data = {
         "model": MODEL,
